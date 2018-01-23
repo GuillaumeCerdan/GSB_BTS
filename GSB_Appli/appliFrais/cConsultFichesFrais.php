@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * Script de contrôle et d'affichage du cas d'utilisation "Consulter une fiche de frais"
  * @package default
  * @todo  RAS
@@ -9,21 +9,21 @@
 
   // page inaccessible si visiteur non connecté
   if ( ! estVisiteurConnecte() ) {
-      header("Location: cSeConnecter.php");  
+      header("Location: cSeConnecter.php");
   }
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
-  
+
   // acquisition des données entrées, ici le numéro de mois et l'étape du traitement
   $moisSaisi=lireDonneePost("lstMois", "");
-  $etape=lireDonneePost("etape",""); 
+  $etape=lireDonneePost("etape","");
 
   if ($etape != "demanderConsult" && $etape != "validerConsult") {
       // si autre valeur, on considère que c'est le début du traitement
-      $etape = "demanderConsult";        
-  } 
+      $etape = "demanderConsult";
+  }
   if ($etape == "validerConsult") { // l'utilisateur valide ses nouvelles données
-                
+
       // vérification de l'existence de la fiche de frais pour le mois demandé
       $existeFicheFrais = existeFicheFrais($idConnexion, $moisSaisi, obtenirIdUserConnecte());
       // si elle n'existe pas, on la crée avec les élets frais forfaitisés à 0
@@ -34,7 +34,7 @@
           // récupération des données sur la fiche de frais demandée
           $tabFicheFrais = obtenirDetailFicheFrais($idConnexion, $moisSaisi, obtenirIdUserConnecte());
       }
-  }                                  
+  }
 ?>
   <!-- Division principale -->
   <div id="contenu">
@@ -55,10 +55,10 @@
                     $mois = $lgMois["mois"];
                     $noMois = intval(substr($mois, 4, 2));
                     $annee = intval(substr($mois, 0, 4));
-            ?>    
+            ?>
             <option value="<?php echo $mois; ?>"<?php if ($moisSaisi == $mois) { ?> selected="selected"<?php } ?>><?php echo obtenirLibelleMois($noMois) . " " . $annee; ?></option>
             <?php
-                    $lgMois = mysqli_fetch_assoc($idJeuMois);        
+                    $lgMois = mysqli_fetch_assoc($idJeuMois);
                 }
                 mysqli_free_result($idJeuMois);
             ?>
@@ -70,11 +70,11 @@
         <input id="ok" type="submit" value="Valider" size="20"
                title="Demandez à consulter cette fiche de frais" />
         <input id="annuler" type="reset" value="Effacer" size="20" />
-      </p> 
+      </p>
       </div>
-        
+
       </form>
-<?php      
+<?php
 
 // demande et affichage des différents éléments (forfaitisés et non forfaitisés)
 // de la fiche de frais demandée, uniquement si pas d'erreur détecté au contrôle
@@ -84,15 +84,15 @@
         }
         else {
 ?>
-    <h3>Fiche de frais du mois de <?php echo obtenirLibelleMois(intval(substr($moisSaisi,4,2))) . " " . substr($moisSaisi,0,4); ?> : 
+    <h3>Fiche de frais du mois de <?php echo obtenirLibelleMois(intval(substr($moisSaisi,4,2))) . " " . substr($moisSaisi,0,4); ?> :
     <em><?php echo $tabFicheFrais["libelleEtat"]; ?> </em>
     depuis le <em><?php echo $tabFicheFrais["dateModif"]; ?></em></h3>
     <div class="encadre">
     <p>Montant validé : <?php echo $tabFicheFrais["montantValide"] ;
-        ?>              
+        ?>
     </p>
-<?php          
-            // demande de la requête pour obtenir la liste des éléments 
+<?php
+            // demande de la requête pour obtenir la liste des éléments
             // forfaitisés du visiteur connecté pour le mois demandé
             $req = obtenirReqEltsForfaitFicheFrais($moisSaisi, obtenirIdUserConnecte());
             $idJeuEltsFraisForfait = mysqli_query($req, $idConnexion);
@@ -140,16 +140,16 @@
              <tr>
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
-                <th class="montant">Montant</th>                
+                <th class="montant">Montant</th>
              </tr>
-<?php          
+<?php
             // demande de la requête pour obtenir la liste des éléments hors
             // forfait du visiteur connecté pour le mois demandé
             $req = obtenirReqEltsHorsForfaitFicheFrais($moisSaisi, obtenirIdUserConnecte());
             $idJeuEltsHorsForfait = mysqli_query($req, $idConnexion);
             $lgEltHorsForfait = mysqli_fetch_assoc($idJeuEltsHorsForfait);
-            
-            // parcours des éléments hors forfait 
+
+            // parcours des éléments hors forfait
             while ( is_array($lgEltHorsForfait) ) {
             ?>
                 <tr>
@@ -167,9 +167,9 @@
 <?php
         }
     }
-?>    
+?>
   </div>
-<?php        
+<?php
   require($repInclude . "_pied.inc.html");
   require($repInclude . "_fin.inc.php");
-?> 
+?>

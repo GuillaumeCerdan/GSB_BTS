@@ -118,7 +118,7 @@ function obtenirDetailFicheFrais($idConnexion, $unMois, $unIdVisiteur) {
  * @param resource $idConnexion identifiant de connexion
  * @param string $unMois mois demand� (MMAAAA)
  * @param string $unIdVisiteur id visiteur
- * @return bool�en existence ou non de la fiche de frais
+ * @return boolean existence ou non de la fiche de frais
  */
 function existeFicheFrais($idConnexion, $unMois, $unIdVisiteur) {
     $unMois = filtrerChainePourBD($unMois);
@@ -303,10 +303,10 @@ function modifierEltsForfait($idConnexion, $unMois, $unIdVisiteur, $desEltsForfa
     $unMois=filtrerChainePourBD($unMois);
     $unIdVisiteur=filtrerChainePourBD($unIdVisiteur);
     foreach ($desEltsForfait as $idFraisForfait => $quantite) {
-        $requete = "update LigneFraisForfait set quantite = " . $quantite
-                    . " where idVisiteur = '" . $unIdVisiteur . "' and mois = '"
+        $requete = "UPDATA LigneFraisForfait set quantite = " . $quantite
+                    . " WHERE idVisiteur = '" . $unIdVisiteur . "' and mois = '"
                     . $unMois . "' and idFraisForfait='" . $idFraisForfait . "'";
-      mysqli_query($requete, $idConnexion);
+      mysqli_query($idConnexion, $requete);
     }
 }
 

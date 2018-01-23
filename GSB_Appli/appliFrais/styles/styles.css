@@ -1,16 +1,8 @@
-/* Styles des divisions principales de la page */
 body{
-    background-color: #77AADD;
-	background-image: url(imgs/FONDGLOBAL.jpg);
-	background-repeat: repeat-x;
-    margin:0% 0%;
-    padding : 0.6em;
-    /*font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;*/
     font-size:0.9em;
     font-family: 'Roboto', sans-sans-serif;
 }
 #page {
-  background-color:white;
   width : 65%;
   margin : auto ;
   border : 0.2em solid black;
@@ -42,26 +34,6 @@ body{
 	width: 14%;
 }
 
-#contenu{
-	border: none;
-	padding: 1.3em;
-	background-color: white;
-	border-left :  groove 0.8em #980101;
-  margin-top : 1.2em;
-	margin-left: 18%;
-/* permet de fixer une hauteur mini sur les navigateurs modernes */
-  min-height:27em;
-/* pour obtenir le m�me effet sur IE, sachant que si le contenu d�passe, il
-"poussera" la hauteur en ne respectant pas la norme. On se joue de ses lacunes
-*/
-  height:27em;
-}
-
-/* pour r�tablir le mauvais effet sur les nav. modernes */
-html>body #contenu{
-  height:auto;
-}
-
 /* style � appliquer � la balise ul d'identifiant menulist */
 ul#menuList{
     list-style:none;
@@ -69,6 +41,8 @@ ul#menuList{
     padding:0px;
     width:98%;
     font-size: 1em;
+    border: 2px solid blue;
+    padding: 10px;
 }
 
 /* style � appliquer aux �l�ments de la balise ul d'identifiant menulist */
@@ -84,16 +58,16 @@ ul#menuList a {
     display:block;
     text-decoration:none;
     width:100%;
+    margin-bottom: 10px;
 }
 ul#menuList a:hover {
-    background: rgb(0,85,227);
-    color: white;
+  font-weight: bold;
 }
 
 #entete #logoGSB {
   float : left;
-  width : 238px;
-  height : 152px;
+  width : 25%;
+  height : 100%;
 }
 
 #entete h1 {
@@ -128,20 +102,18 @@ ul#menuList a:hover {
   border-bottom-width:1px;
   margin-bottom : 0em;
   width : 95%;
+  margin-right: 0;
+  margin-left: 0;
 }
 .piedForm {
   border-bottom-width : 0.1em;
   border-left-width : 0.1em;
-  border-right-width : 0.1em;
+  border-right-width : 0.1em; 
   border-top-width : 0em;
   border-style : solid;
   border-color : #000;
   text-align:right ;
   width : 95%;
-  margin-top:0em;
-}
-form {
-  margin-bottom:1em;
 }
 .corpsForm legend {
   font-weight:bold;
@@ -155,20 +127,7 @@ form {
 	padding: 0 .5em 0 0;
 	line-height: 1.8;
 }
-input, button, textarea, select{
-  font-family:"Trebuchet MS", sans-serif;
-  font-size : 1em;
-}
-button{
-  width : 60px;
-  height : 30px;
-  text-align:center;
-  vertical-align:middle;
-}
-input:hover, textarea:hover, select:hover{
-  background-color : #FAFAE6;
-  cursor : pointer;
-}
+
 
 /*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de
 taille de caract�res l�g�rement sup�rieure � la normale */
@@ -289,17 +248,53 @@ table.listeLegere th.libelle{
 	background-color: #E9F1FE;
   height : 28px;
 }
-
 #contenu img {
-  height : 28px;
+  height : 60px;
   float : left;
-
 }
-
-
-#frmConnexion {
-  font-size: 1rem;
+#contenu {
+  background: #153D5D;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
-
-
-/*                                               */
+.title-home {
+  color: #88A8CF;
+  margin-bottom: 50px;
+  font-size: 30px;
+}
+.container-white {
+  padding: 20px 20px 20px 20px;
+  background-color: #fff;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn {
+  width: 60% ;
+  height: 40px;
+  margin-top: 10px;
+  background-color: #fff;
+  border: 2px black solid;
+  color: #000;
+  font-weight: bold;
+}
+.btn:hover {
+  background-color: #fff;
+  border: 3px solid black;
+  color: #000;
+}
+.label {
+  font-size: 22px;
+  position: relative;
+  bottom: 0;
+  right: 0;
+}
+.input {
+  width: 80%;
+  height: 5%;
+  font-size: 17px;
+}
+.asterisk {
+  color: grey;
+}

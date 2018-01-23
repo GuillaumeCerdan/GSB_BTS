@@ -102,16 +102,16 @@ function estEntierPositif($valeur) {
  * Renvoie la valeur booléenne true si toutes les valeurs sont bien renseignées et
  * numériques entières positives. False si l'une d'elles ne l'est pas.
  * @param array $lesValeurs tableau des valeurs
- * @return booléen succès ou échec
+ * @return boolean succès ou échec
  */ 
 function verifierEntiersPositifs($lesValeurs){
     $ok = true;     
-    foreach ( $lesValeurs as $val ) {
-        if ($val=="" || ! estEntierPositif($val) ) {
+    foreach ($lesValeurs as $val) {
+        if ($val == "" || !estEntierPositif($val)) {
             $ok = false;
         }
     }
-    return $ok; 
+    return $ok;
 }
 
 /** 
@@ -188,7 +188,7 @@ function lireDonnee($nomDonnee, $valDefaut="") {
  * @param string message
  * @return void
  */ 
-function ajouterErreur(&$tabErr,$msg) {
+function ajouterErreur($tabErr,$msg) {
     $tabErr[count($tabErr)]=$msg;
 }
 
@@ -248,7 +248,7 @@ function filtrerChainePourNavig($str) {
  * @param array $tabErrs tableau des messages d'erreurs passé par référence
  * @return void
  */ 
-function verifierLigneFraisHF($date, $libelle, $montant, &$tabErrs) {
+function verifierLigneFraisHF($date, $libelle, $montant, $tabErrs) {
     // vérification du libellé 
     if ($libelle == "") {
 		ajouterErreur($tabErrs, "Le libellé doit être renseigné.");

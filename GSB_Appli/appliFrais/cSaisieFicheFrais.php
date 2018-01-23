@@ -67,12 +67,11 @@
           echo toStringErreurs($tabErreurs);
       }
       else {
+    }
+}
 ?>
       <p class="info">Les modifications de la fiche de frais ont bien été enregistrées</p>
-<?php
-      }
-  }
-      ?>
+
       <form action="" method="post">
       <div class="corpsForm">
           <input type="hidden" name="etape" value="validerSaisie" />
