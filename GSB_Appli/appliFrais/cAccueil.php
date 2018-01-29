@@ -6,6 +6,7 @@
  */
   $repInclude = './include/';
   require($repInclude . "_init.inc.php");
+  
 
   // page inaccessible si visiteur non connecté
   if ( ! estVisiteurConnecte() ) 
@@ -19,7 +20,8 @@
   <div id="contenu">
       <h2>Bienvenue sur l'intranet GSB</h2>
   </div>
-<?php        
+<?php
+  require($repInclude . "_leftMenu.inc.php");
   require($repInclude . "_pied.inc.html");
   require($repInclude . "_fin.inc.php");
 ?>
