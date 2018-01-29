@@ -96,6 +96,7 @@ function estEntierPositif($valeur) {
     return preg_match("/[^0-9]/", $valeur) == 0;
 }
 
+
 /** 
  * Vérifie que chaque valeur est bien renseignée et numérique entière positive.
  *  
@@ -113,6 +114,21 @@ function verifierEntiersPositifs($lesValeurs){
     }
     return $ok;
 }
+/*
+function estEntierPositif($valeur) {
+    if ($valeur > 0) {
+      return true;
+    }
+    else if ($valeur < 0) {
+      return false;
+    }
+    else {
+      return "0";
+    }
+}
+
+echo estEntierPositif(-12);
+*/
 
 /** 
  * Fournit la valeur d'une donnée transmise par la méthode get (url).                    
