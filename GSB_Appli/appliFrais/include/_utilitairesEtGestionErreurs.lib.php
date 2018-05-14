@@ -24,13 +24,13 @@ function obtenirLibelleMois($unNoMois) {
     return $libelle;
 }
 
-/** 
+/**
  * Vérifie si une chaîne fournie est bien une date valide, au format JJ/MM/AAAA.                     
- * 
+ *
  * Retrourne true si la chaîne $date est une date valide, au format JJ/MM/AAAA, false sinon.
  * @param string date à vérifier
  * @return boolean succès ou échec
- */ 
+ */
 function estDate($date) {
 	$tabDate = explode('/',$date);
 	if (count($tabDate) != 3) {
@@ -93,9 +93,13 @@ function estDansAnneeEcoulee($date) {
  * @return boolean succès ou échec
  */ 
 function estEntierPositif($valeur) {
-    return preg_match("/[^0-9]/", $valeur) == 0;
+    if (intval($valeur) >= 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
-
 
 /** 
  * Vérifie que chaque valeur est bien renseignée et numérique entière positive.
@@ -106,29 +110,14 @@ function estEntierPositif($valeur) {
  * @return boolean succès ou échec
  */ 
 function verifierEntiersPositifs($lesValeurs){
-    $ok = true;     
-    foreach ($lesValeurs as $val) {
-        if ($val == "" || !estEntierPositif($val)) {
-            $ok = false;
+    $ok = false;     
+    foreach ( $lesValeurs as $val ) {
+        if ($val!="" || estEntierPositif($val) ) {
+            $ok = true;
         }
     }
-    return $ok;
+    return $ok; 
 }
-/*
-function estEntierPositif($valeur) {
-    if ($valeur > 0) {
-      return true;
-    }
-    else if ($valeur < 0) {
-      return false;
-    }
-    else {
-      return "0";
-    }
-}
-
-echo estEntierPositif(-12);
-*/
 
 /** 
  * Fournit la valeur d'une donnée transmise par la méthode get (url).                    
@@ -200,11 +189,11 @@ function lireDonnee($nomDonnee, $valDefaut="") {
  * 
  * Ajoute le message $msg en fin de tableau $tabErr. Ce tableau est passé par 
  * référence afin que les modifications sur ce tableau soient visibles de l'appelant.  
- * @param array $tabErr  
- * @param string message
+ * @param array $tabErr
+ * @param string $msg
  * @return void
  */ 
-function ajouterErreur($tabErr,$msg) {
+function ajouterErreur(&$tabErr,$msg) {
     $tabErr[count($tabErr)]=$msg;
 }
 
@@ -264,7 +253,7 @@ function filtrerChainePourNavig($str) {
  * @param array $tabErrs tableau des messages d'erreurs passé par référence
  * @return void
  */ 
-function verifierLigneFraisHF($date, $libelle, $montant, $tabErrs) {
+function verifierLigneFraisHF($date, $libelle, $montant, &$tabErrs) {
     // vérification du libellé 
     if ($libelle == "") {
 		ajouterErreur($tabErrs, "Le libellé doit être renseigné.");

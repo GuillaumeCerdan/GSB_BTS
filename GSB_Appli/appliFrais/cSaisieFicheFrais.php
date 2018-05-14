@@ -1,5 +1,5 @@
 <?php
-/**
+/** 
  * Script de contrôle et d'affichage du cas d'utilisation "Saisir fiche de frais"
  * @package default
  * @todo  RAS
@@ -9,7 +9,7 @@
 
   // page inaccessible si visiteur non connecté
   if (!estVisiteurConnecte()) {
-      header("Location: cSeConnecter.php");
+      header("Location: cSeConnecter.php");  
   }
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
@@ -22,28 +22,28 @@
       ajouterFicheFrais($idConnexion, $mois, obtenirIdUserConnecte());
   }
   // acquisition des données entrées
-  // acquisition de l'étape du traitement
+  // acquisition de l'étape du traitement 
   $etape=lireDonnee("etape","demanderSaisie");
-  // acquisition des quantités des éléments forfaitisés
+  // acquisition des quantités des éléments forfaitisés 
   $tabQteEltsForfait=lireDonneePost("txtEltsForfait", "");
   // acquisition des données d'une nouvelle ligne hors forfait
   $idLigneHF = lireDonnee("idLigneHF", "");
   $dateHF = lireDonnee("txtDateHF", "");
   $libelleHF = lireDonnee("txtLibelleHF", "");
   $montantHF = lireDonnee("txtMontantHF", "");
-
+ 
   // structure de décision sur les différentes étapes du cas d'utilisation
-  if ($etape == "validerSaisie") {
-      // l'utilisateur valide les éléments forfaitisés
+  if ($etape == "validerSaisie") { 
+      // l'utilisateur valide les éléments forfaitisés         
       // vérification des quantités des éléments forfaitisés
-      $ok = verifierEntiersPositifs($tabQteEltsForfait);
+      $ok = verifierEntiersPositifs($tabQteEltsForfait);      
       if (!$ok) {
           ajouterErreur($tabErreurs, "Chaque quantité doit être renseignée et numérique positive.");
       }
       else { // mise à jour des quantités des éléments forfaitisés
           modifierEltsForfait($idConnexion, $mois, obtenirIdUserConnecte(),$tabQteEltsForfait);
       }
-  }
+  }                                                       
   elseif ($etape == "validerSuppressionLigneHF") {
       supprimerLigneHF($idConnexion, $idLigneHF);
   }
@@ -54,9 +54,9 @@
           ajouterLigneHF($idConnexion, $mois, obtenirIdUserConnecte(), $dateHF, $libelleHF, $montantHF);
       }
   }
-  else { // on ne fait rien, étape non prévue
-
-  }
+  else { // on ne fait rien, étape non prévue 
+  
+  }                                  
 ?>
   <!-- Division principale -->
   <div id="contenu">
@@ -65,21 +65,22 @@
   if ($etape == "validerSaisie" || $etape == "validerAjoutLigneHF" || $etape == "validerSuppressionLigneHF") {
       if (nbErreurs($tabErreurs) > 0) {
           echo toStringErreurs($tabErreurs);
-      }
+      } 
       else {
-    }
-}
 ?>
-      <p class="info">Les modifications de la fiche de frais ont bien été enregistrées</p>
-
+      <p class="info">Les modifications de la fiche de frais ont bien été enregistrées</p>        
+<?php
+      }   
+  }
+      ?>            
       <form action="" method="post">
       <div class="corpsForm">
           <input type="hidden" name="etape" value="validerSaisie" />
           <fieldset>
             <legend>Eléments forfaitisés
             </legend>
-      <?php
-            // demande de la requête pour obtenir la liste des éléments
+      <?php          
+            // demande de la requête pour obtenir la liste des éléments 
             // forfaitisés du visiteur connecté pour le mois demandé
             $req = obtenirReqEltsForfaitFicheFrais($mois, obtenirIdUserConnecte());
             $idJeuEltsFraisForfait = mysqli_query($idConnexion, $req);
@@ -92,8 +93,8 @@
             ?>
             <p>
               <label for="<?php echo $idFraisForfait ?>">* <?php echo $libelle; ?> : </label>
-              <input type="text" id="<?php echo $idFraisForfait ?>"
-                    name="txtEltsForfait[<?php echo $idFraisForfait ?>]"
+              <input type="text" id="<?php echo $idFraisForfait ?>" 
+                    name="txtEltsForfait[<?php echo $idFraisForfait ?>]" 
                     size="10" maxlength="5"
                     title="Entrez la quantité de l'élément forfaitisé"
                     value="<?php echo $quantite; ?>" />
@@ -112,7 +113,7 @@
         <input id="annuler" type="reset" value="Effacer" size="20" />
       </p>
       </div>
-
+        
       </form>
   	<table class="listeLegere">
   	   <caption>Descriptif des éléments hors forfait
@@ -120,16 +121,16 @@
              <tr>
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
-                <th class="montant">Montant</th>
-                <th class="action">&nbsp;</th>
+                <th class="montant">Montant</th>  
+                <th class="action">&nbsp;</th>              
              </tr>
-<?php
+<?php          
           // demande de la requête pour obtenir la liste des éléments hors
           // forfait du visiteur connecté pour le mois demandé
           $req = obtenirReqEltsHorsForfaitFicheFrais($mois, obtenirIdUserConnecte());
           $idJeuEltsHorsForfait = mysqli_query($idConnexion, $req);
           $lgEltHorsForfait = mysqli_fetch_assoc($idJeuEltsHorsForfait);
-
+          
           // parcours des frais hors forfait du visiteur connecté
           while ( is_array($lgEltHorsForfait) ) {
           ?>
@@ -155,34 +156,44 @@
             </legend>
             <p>
               <label for="txtDateHF">* Date : </label>
-              <input type="text" id="txtDateHF" name="txtDateHF" size="12" maxlength="10"
-                     title="Entrez la date d'engagement des frais au format JJ/MM/AAAA"
+              <input type="text" id="txtDateHF" name="txtDateHF" size="12" maxlength="10" 
+                     title="Entrez la date d'engagement des frais au format JJ/MM/AAAA" 
                      value="<?php echo $dateHF; ?>" />
             </p>
             <p>
               <label for="txtLibelleHF">* Libellé : </label>
-              <input type="text" id="txtLibelleHF" name="txtLibelleHF" size="70" maxlength="100"
-                    title="Entrez un bref descriptif des frais"
+              <input type="text" id="txtLibelleHF" name="txtLibelleHF" size="70" maxlength="100" 
+                    title="Entrez un bref descriptif des frais" 
                     value="<?php echo filtrerChainePourNavig($libelleHF); ?>" />
             </p>
             <p>
               <label for="txtMontantHF">* Montant : </label>
-              <input type="text" id="txtMontantHF" name="txtMontantHF" size="12" maxlength="10"
+              <input type="text" id="txtMontantHF" name="txtMontantHF" size="12" maxlength="10" 
                      title="Entrez le montant des frais (le point est le séparateur décimal)" value="<?php echo $montantHF; ?>" />
             </p>
           </fieldset>
       </div>
       <div class="piedForm">
       <p>
-        <input id="ajouter" type="submit" value="Ajouter" size="20"
+        <input id="ajouter" type="submit" value="Ajouter" size="20" 
                title="Ajouter la nouvelle ligne hors forfait" />
         <input id="effacer" type="reset" value="Effacer" size="20" />
-      </p>
+      </p> 
       </div>
-
+      <div class="txt-ctr">
+      <a href="cPortailUpload.php">Aller vers le portail d'upload</a>
+        </div>
       </form>
   </div>
-<?php
+  <style>
+    .txt-ctr {
+        text-align: center;
+        font-size: 20px;    
+    }
+
+
+  </style>
+<?php        
   require($repInclude . "_pied.inc.html");
   require($repInclude . "_fin.inc.php");
-?>
+?> 
