@@ -71,7 +71,6 @@ body #contenu{
   -o-transition: all .25s ease;
   transition: all .25s ease;
   margin-right: 10px; 
-
 }
 .dropdownmenu li:hover a {
   background: rgba(0,0,128, 0.6);
@@ -103,14 +102,14 @@ li:hover ul#submenu {
 }
 /* apparences des liens dans listes et sous-listes non num�rot�es */
 ul#menuList a {
-    color:rgb(0,85,227);
-    /*display:block;*/
-    text-decoration:none;
-    width:100%;
+  color:rgb(0,85,227);
+  /*display:block;*/
+  text-decoration:none;
+  width:100%;
 }
 ul#menuList a:hover {
-    background: rgb(0,85,227);
-    color: white;
+  background: rgb(0,85,227);
+  color: white;
 }
 
 #entete #logoGSB {
@@ -188,20 +187,20 @@ input:hover, textarea:hover, select:hover{
 /*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de 
 taille de caract�res l�g�rement sup�rieure � la normale */
 .erreur{ 
-   background-color:rgb(237,210,229);
-   color:rgb(203,28,128);
-   font-size:1.1em;
-   width:95%;
+  background-color:rgb(237,210,229);
+  color:rgb(203,28,128);
+  font-size:1.1em;
+  width:95%;
 }
 .centre {
   text-align:center;
 }
 
 .info {
-   background-color:rgb(178,207,81);
-   color : white;
-   font-size:1.1em;
-   width : 95%  
+  background-color:rgb(178,207,81);
+  color : white;
+  font-size:1.1em;
+  width : 95%  
 }
 
 .encadre {
@@ -216,14 +215,14 @@ taille de caract�res l�g�rement sup�rieure � la normale */
 
 /* Style pour les liens de la page principale */
 #contenu a {
-   font-size : 1.1em;
-   color:gray;
-   text-decoration:none;
+  font-size : 1.1em;
+  color:gray;
+  text-decoration:none;
 }
 #contenu a:hover {
-   text-decoration:underline;
-   background-color : #D9BB7A;
-   font-size : 1em;
+  text-decoration:underline;
+  background-color : #D9BB7A;
+  font-size : 1em;
 }
 
 /* Style pour les parties importantes de la page principale */
@@ -233,31 +232,31 @@ taille de caract�res l�g�rement sup�rieure � la normale */
 
 /* Styles pour les tableaux de la page principale */
 #contenu table {
-   background-color:#FFF;
-   border : 0.1em solid #777777;
-   color:black;
-   margin-right : auto ;
-   margin-left:0.3em;
-   border-collapse : collapse;
+  background-color:#FFF;
+  border : 0.1em solid #777777;
+  color:black;
+  margin-right : auto ;
+  margin-left:0.3em;
+  border-collapse : collapse;
 }
 
 /* Style pour les lignes d'en-t�te des tableaux */
 #contenu th {  
-   background-color:#77AADD;
-   height:21px;
-   text-align:left;
-   vertical-align:top;
-   font-weight:bold;
-   border-bottom:0.1em solid #777777;
-   font-size:1.1em;
+  background-color:#77AADD;
+  height:21px;
+  text-align:left;
+  vertical-align:top;
+  font-weight:bold;
+  border-bottom:0.1em solid #777777;
+  font-size:1.1em;
 } 
 
 #contenu td {
-   border :1px solid #777777;
+  border :1px solid #777777;
 }
 
 #contenu h3 {
-    font-size : 1.2em;
+  font-size : 1.2em;
 }
 table.listeLegere {
 /*    width:80%;*/
@@ -304,19 +303,13 @@ table.listeLegere th.libelle{
 	background-color: #E9F1FE;
   height : 28px;
 }
-
-#contenu img {
-  height : 28px;
-  float : left;
-
-}
 .meshim_widget_widgets_TitleBar .border_overlay {
   background-color:  blue !important;
 }
 
 #left {
   padding: 25px;
-  background-color: rgba(0, 0, 255, 0.5);
+  background-color: #77AAFF;
   width: auto;
   float: left;
   cursor: pointer;
@@ -325,11 +318,12 @@ table.listeLegere th.libelle{
   margin-top: 50px; 
   min-height: 100px;
   min-width: 350px;
+  position: relative;
 }
 
 #right {
   padding: 20px;
-  background-color: rgba(0, 0, 255, 0.5);
+  background-color: #77AAFF;
   width: auto;
   float: right;
   cursor: pointer;
@@ -338,7 +332,23 @@ table.listeLegere th.libelle{
   min-height: 100px;
   margin-right: 100px;
   margin-top: 50px; 
+  position: relative;
 }
-.logo-png {
+.home-container > img {
   margin: 2%;
+  position: absolute;
+  left: -8%;
+  height: 125px;
+  opacity: 0.3;
+  top: 0%;
+}
+.ctr-txt-abs {
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  right: auto;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: white;
+  font-size: 20px;
 }
