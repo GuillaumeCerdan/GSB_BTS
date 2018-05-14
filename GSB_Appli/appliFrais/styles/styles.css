@@ -70,9 +70,12 @@ body #contenu{
   -ms-transition: all .25s ease;
   -o-transition: all .25s ease;
   transition: all .25s ease;
+  margin-right: 10px; 
+
 }
 .dropdownmenu li:hover a {
-  background: navy;
+  background: rgba(0,0,128, 0.6);
+  border-radius: 5px;
 }
 /* fin redef menu gauche */
 #submenu {
@@ -309,4 +312,33 @@ table.listeLegere th.libelle{
 }
 .meshim_widget_widgets_TitleBar .border_overlay {
   background-color:  blue !important;
+}
+
+#left {
+  padding: 25px;
+  background-color: rgba(0, 0, 255, 0.5);
+  width: auto;
+  float: left;
+  cursor: pointer;
+  text-align: center;
+  margin-left: 100px;  
+  margin-top: 50px; 
+  min-height: 100px;
+  min-width: 350px;
+}
+
+#right {
+  padding: 20px;
+  background-color: rgba(0, 0, 255, 0.5);
+  width: auto;
+  float: right;
+  cursor: pointer;
+  text-align: center;
+  min-width: 350px;
+  min-height: 100px;
+  margin-right: 100px;
+  margin-top: 50px; 
+}
+.logo-png {
+  margin: 2%;
 }

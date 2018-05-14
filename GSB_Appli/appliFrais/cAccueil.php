@@ -15,6 +15,8 @@
   require($repInclude . "_entete.inc.html");
   require($repInclude . "_sommaire.inc.php");
 
+  $mois = sprintf("%04d%02d", date("Y"), date("m"));
+
 ?>
   <!-- Division principale -->
   <div id="contenu">
@@ -22,26 +24,30 @@
       <h2>Bienvenue sur l'intranet GSB</h2>
 
  
+<div id="left" onclick="goToFicheFrais()">
+  <img class="logo-png" src="resources/sheet.png"/>
+  <p>Consulter mes fiches de frais</p>
+</div>
+<div id="right" onclick="goToSaisieFrais()">
+  <img class="logo-png" src="resources/pen-sheet.png"/>
+  <p>Saisie fiches de frais du mois de <?php echo obtenirLibelleMois(intval(substr($mois,4,2))) ?></p>
+</div>
 
 
+<script type="text/javascript">
 
-<!-- guillaume.js
-$(document).on('click' ,'.displayFullClient' , function() {
-    $('#display_client').modal('show');
+var right = document.getElementById('right');
+var left = document.getElementById('left');
 
-    $.ajax({
-        url : "includes/getClient.php",
-        type : 'GET',
-        data : {idclient: $(this).attr("data-id")},
-        success: function(result){
-            console.log(result);
-          $("#tbody_client").html(result);
-        },
-        error: function (e) {
-          console.log('Error.', e);
-        }
-    });
-}); -->
+function goToFicheFrais() {
+  window.location.href="cConsultFichesFrais.php";
+}
+
+function goToSaisieFrais() {
+  window.location.href="cSaisieFicheFrais.php";
+}
+
+</script>
 
 
 

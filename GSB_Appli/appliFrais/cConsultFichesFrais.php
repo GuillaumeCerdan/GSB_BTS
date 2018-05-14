@@ -21,7 +21,7 @@
   if ($etape != "demanderConsult" && $etape != "validerConsult") {
       // si autre valeur, on considère que c'est le début du traitement
       $etape = "demanderConsult";        
-  } 
+  }
   if ($etape == "validerConsult") { // l'utilisateur valide ses nouvelles données
                 
       // vérification de l'existence de la fiche de frais pour le mois demandé

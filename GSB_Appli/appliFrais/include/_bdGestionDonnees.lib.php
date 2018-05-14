@@ -123,7 +123,7 @@ function obtenirDetailFicheFrais($idCnx, $unMois, $unIdVisiteur) {
  */
 function existeFicheFrais($idCnx, $unMois, $unIdVisiteur) {
     $unMois = filtrerChainePourBD($unMois);
-    $requete = "select idVisiteur from FicheFrais where idVisiteur='" . $unIdVisiteur . "' and mois='" . $unMois . "'";
+    $requete = "select idVisiteur from ficheFrais where idVisiteur='" . $unIdVisiteur . "' and mois='" . $unMois . "'";
     $idJeuRes = mysqli_query($idCnx, $requete);  
     $ligne = false ;
     if ($idJeuRes) {
@@ -143,7 +143,7 @@ function existeFicheFrais($idCnx, $unMois, $unIdVisiteur) {
  * @return string dernier mois sous la forme AAAAMM
  */
 function obtenirDernierMoisSaisi($idCnx, $unIdVisiteur) {
-	$requete = "select max(mois) as dernierMois from FicheFrais where idVisiteur='" .
+	$requete = "select max(mois) as dernierMois from ficheFrais where idVisiteur='" .
             $unIdVisiteur . "'";
 	$idJeuRes = mysqli_query($idCnx, $requete);
     $dernierMois = false ;
@@ -166,37 +166,25 @@ function obtenirDernierMoisSaisi($idCnx, $unIdVisiteur) {
  * @return void
  */
 function ajouterFicheFrais($idCnx, $unMois, $unIdVisiteur) {
+    ("création d'une entrée dans la bdd pour le mois courant veuillez raffraichir la page");
+    //var_dump($unIdVisiteur);
     $unMois = filtrerChainePourBD($unMois);
+    $id = filtrerChainePourBD($unIdVisiteur);
+    //var_dump($id);
+    //var_dump($etat);
     // modification de la derni�re fiche de frais du visiteur
-    $dernierMois = obtenirDernierMoisSaisi($idCnx, $unIdVisiteur);
-	$laDerniereFiche = obtenirDetailFicheFrais($idCnx, $dernierMois, $unIdVisiteur);
-	if ( is_array($laDerniereFiche) && $laDerniereFiche['idEtat']=='CR'){
-		modifierEtatFicheFrais($idCnx, $dernierMois, $unIdVisiteur, 'CL');
-	}
-    
     // ajout de la fiche de frais � l'�tat Cr��
-    $requete = "insert into FicheFrais (idVisiteur, mois, nbJustificatifs, montantValide, idEtat, dateModif) values ('" 
-              . $unIdVisiteur 
-              . "','" . $unMois . "',0,NULL, 'CR', '" . date("Y-m-d") . "')";
-    mysqli_query($idCnx, $requete);
-    
+    $requete = "insert into fichefrais (idVisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat)
+                values ('". $id. "' ," . $unMois . " ,0 ,NULL ,'" . date("Y-m-d") . "' ,'CR' )";
+    filtrerChainePourBD($requete);
+    //print($requete);
+    mysqli_query($idCnx,$requete);
     // ajout des �l�ments forfaitis�s
-    $requete = "select id from FraisForfait";
-    $idJeuRes = mysqli_query($idCnx, $requete);
-    if ( $idJeuRes ) {
-        $ligne = mysqli_fetch_assoc($idJeuRes);
-        while ( is_array($ligne) ) {
-            $idFraisForfait = $ligne["id"];
-            // insertion d'une ligne frais forfait dans la base
-            $requete = "insert into LigneFraisForfait (idVisiteur, mois, quantite)
-                        values ('" . $unIdVisiteur . "','" . $unMois . "', 0)";
-            mysqli_query($idCnx, $requete);
-            // passage au frais forfait suivant
-            $ligne = mysqli_fetch_assoc($idJeuRes);
-        }
-        mysqli_free_result($idJeuRes);       
-    }        
+    $requete = "insert into lignefraisforfait (lignefraisforfait.idVisiteur, lignefraisforfait.mois, lignefraisforfait.ETP, lignefraisforfait.KM, lignefraisforfait.NUI, lignefraisforfait.REP)
+                values ('" . $id . "','" . $unMois . "', 0 , 0 , 0 , 0)";
+    mysqli_query($idCnx,$requete);
 }
+
 
 /**
  * Retourne le texte de la requ�te select concernant les mois pour lesquels un 
@@ -226,9 +214,7 @@ function obtenirReqMoisFicheFrais($unIdVisiteur) {
  */                                                 
 function obtenirReqEltsForfaitFicheFrais($unMois, $unIdVisiteur) {
     $unMois = filtrerChainePourBD($unMois);
-    $requete = "select idFraisForfait, libelle, quantite from LigneFraisForfait
-              inner join FraisForfait on FraisForfait.id = LigneFraisForfait.idFraisForfait
-              where idVisiteur='" . $unIdVisiteur . "' and mois='" . $unMois . "'";
+    $requete = "SELECT lignefraisforfait.ETP, lignefraisforfait.KM, lignefraisforfait.NUI, lignefraisforfait.REP FROM lignefraisforfait WHERE idVisiteur ='".$unIdVisiteur."'and mois='".$unMois."'";
     return $requete;
 }
 

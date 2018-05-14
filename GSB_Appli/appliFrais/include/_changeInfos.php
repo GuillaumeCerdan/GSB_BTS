@@ -3,13 +3,12 @@
     $idConnexion=connecterServeurBD();
     $link = mysqli_connect("localhost", "root", "root");
 
-    //$nomFamille = isset($_POST['nomFamille']) ? $_POST['nomFamille'] : NULL;
     $nomFamille = $_POST['nomFamille'];
     $idVisiteur = obtenirIdUserConnecte();
     var_dump($idVisiteur);
     var_dump($nomFamille);
-    $req = "UPDATE visiteur from gsb_valide SET('" . $nomFamille . "') WHERE id='" . $idVisiteur . "'";
-    if (mysqli_query($idConnexion, $req) === true) {
+    $req_nomFamille = "UPDATE visiteur SET('" . $nomFamille . "') WHERE id='" . $idVisiteur . "'";
+    if (mysqli_query($idConnexion, $req_nomFamille) === true) {
         echo 'Ca a marché mon cochon';
     }
     else {

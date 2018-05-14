@@ -5,7 +5,7 @@ include '/../include/connection_bdd.php';
 
 
 function allcrypt($bd){
-  $requete = 'select id,mdp from visiteur';
+  $requete = 'select id_gen_mdp, mdp from visiteur';
   $result = $bd->query($requete);
   foreach ($result as $row) {
       if (strlen($row['mdp']) > 15){
@@ -13,7 +13,7 @@ function allcrypt($bd){
       }
       else {
           $mdp = crypte($row['mdp']);
-          $requete = 'update visiteur set mdp = "'.$mdp.'" where id = "'.$row['id'].'"';
+          $requete = 'update visiteur set mdp = "'.$mdp.'" where id_gen_mdp = "'.$row['id'].'"';
           $result = $bd->query($requete);
       }
   }
